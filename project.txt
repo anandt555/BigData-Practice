@@ -1,0 +1,24 @@
+Datahub:
+
+Created a data pipeline which takes data from multiple sources like oracle, flatfiles and salesforce and did the asked transformations and than stored the data in the redshift, 
+its a incremental load and using the scd1 logic to update the records
+
+In this I have created there glue job:
+-- first job is picking data from landing and putting it into raw layer where all the data would be there in their respective foloder.
+-- In second job we are picing files from raw layer and converting different format files into parquest and putting it into indermediate layer.
+-- Now we have third job which is running a crawler and getting the matadata of all the file which are at intermediate layer and then we are writting all thw business logic i.e applying and joins, aggriation and once we have the
+  final data we are writting it to redshift and for incremental load we are following SCD1 logic.
+
+  Once everthing would be done we are using aws airflow service to run and schedue jobs, also for the alerts I am using SNS topic, for the data injection for api's we are writting custom python code, for sql we are directly connecting
+  and querying it using python for saas application uisng the appflow connection, for flat files we have integrations which are uploading the data to the landing location and for the external data we have different services which are
+  being ran by external peoele which are sending the data to us.
+
+
+
+
+Analytics tool:
+Created a data pipeline which is reading the data from database and Elasticsearch API using AWS Glue and then applying needed transformations using AWS Glue Jobs & Pyspark and utilized S3 as datalake 
+and aws quicksight to visualize the final data.
+
+In this also its pipeline was similar to first one but in this, we were writting the final data to s3 and once we had the data there we were loading it to spice meomory of the aws quicksight and ocne data would be there we were
+creating different widgets as per the business requiremnt and create the dashboard.
